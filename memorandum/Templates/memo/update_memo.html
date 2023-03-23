@@ -1,0 +1,48 @@
+{% extends 'CRUD/update.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css'%}"> <!-- https://fontawesome.com/ -->
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/templatemo-xtra-blog.css' %}" rel="stylesheet">
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+{% block header %}
+{% endblock %}
+<div class="col-md-8" style="margin: auto;">
+    <div class="card-header bg-primary text-white">
+        {% block titulo %}
+            <h3 class="card-title" style="text-align:center;">Actualizar Memorandum</h3>
+        {% endblock %}
+    </div>
+    
+            <form style="for form-control form-row" enctype="multipart/form-data" method="post" >
+                {% csrf_token %}
+                <div class="card-body">
+                    
+                    {% block forms %}
+                    {{ form|crispy|safe }}
+                    {% endblock %}
+    
+    
+                </div>
+                {%block upd%}
+                    <div class="card-footer">
+                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <a href="{% url 'list_memorandums' %}" class="btn btn-danger" >Cancelar</a>
+        
+                    </div>
+                {%endblock%}
+            </form>
+        
+            
+         
+        
+    
+    
+</div>
+{%endblock%}

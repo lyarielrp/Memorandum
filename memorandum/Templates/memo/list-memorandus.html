@@ -1,0 +1,84 @@
+{% extends 'CRUD/list.html' %}
+{% block content %}
+{% block header %}
+{% endblock %}
+
+<div   class="col-lg-10 col-md-8 container-fluid">
+{%block list%}
+<div style="margin:auto; text-align: center;" class="card bg-primary text-white" >
+    <h3 class="card-body">Listado de Memorandums</h3>
+</div>
+{%endblock%}
+</div>
+<div  class="col-md-8 container-fluid ">
+ 
+    <div class="row">
+       
+        {%block bot%}
+        <div class="card-footer">
+            <a href="{% url 'Home' %}" class="btn btn-link">Ir al Inicio</a>
+            <a href="{% url 'add_memorandums' %}" class="btn btn-primary">Registrar</a>
+        </div>
+        {%endblock%}
+
+        <div class="card-body">
+            <table  class="table">
+                {% block thead %}
+                <thead style="margin-left:40px;">
+                    <td>Nombre</td>
+                    <td>Creado</td>
+                    <td>Acciones</td>
+                    
+                </thead>
+                {% endblock %}
+
+                {% block tbody %}
+                <tbody>
+                    {% if page_obj %}
+                    {% for m in page_obj.object_list %}
+                        <tr>
+                            <td>{{ m.nombre }}</td>
+                            <td>{{ m.created_at }}</td>
+                           
+                            <td>
+                                <a href="{% url 'update_memorandums' m.id %}" class="btn btn-warning"><i>Modificar</i></a>
+                                <a href="{% url 'delete_memorandums' m.id %}" class="btn btn-danger"><i>Eliminar</i></a>
+                                <a href="{% url 'detail_memorandums' m.user.username m.id %}" class="btn btn-info"><i>Leer</i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <div style="text-align: center;">
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; primera</a>
+                                <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+                            {% endif %}
+                    
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                    
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">siguiente</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                    </div>
+            
+            
+                    {% else %}
+                    <tr>
+                        <td> No hay datos a Mostrar</td>
+                    </tr>
+                    {% endif %}
+            
+                </tbody>
+                {% endblock %}
+            </table>    
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

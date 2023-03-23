@@ -1,0 +1,48 @@
+{% extends 'memorandum/base.html' %}
+{% load static %}
+{% block content %}
+{% block header %}
+
+{% endblock %}
+
+
+<div style="margin:auto; text-align: center;" class="card bg-primary text-white form-group col-md-8 container-fluid" >
+    <h3 class="card-body">Invitar a un Lector</h3>
+</div>
+
+
+<div  class="col-md-8 container-fluid ">
+ 
+    <div class="row">
+
+           <form method='POST' class="form-group col-md-8 container-fluid" action="{% url 'invitar' %}" >
+            {% csrf_token %}
+            
+            <label for="nombre">Nombre del Memorandum</label>
+
+            <select class="form-control" name="nombre" id="nombre">
+               
+              <option value="{{nombre}}">
+                {{nombre}}
+              </option>
+              
+            </select> 
+            <label for="email">Seleccionar Invitado</label>
+
+            <select class="form-control" name="email" id="email">
+              {% for em in usuarios %}  
+              <option value="{{em.email}}">
+                {{em.email}}
+              </option>
+              {% endfor %}
+            </select> 
+            <a href="{% url 'list_memorandums' %}" class="btn btn-danger" >Cancelar</a>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+           </form>
+       
+  
+         
+        </div>
+  
+</div>
+{% endblock %}

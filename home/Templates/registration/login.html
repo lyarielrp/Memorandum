@@ -1,0 +1,53 @@
+{% extends 'memorandum/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css'%}"> <!-- https://fontawesome.com/ -->
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/templatemo-xtra-blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+{% block header %}
+{% endblock %}
+
+{% if next %}
+{% if user.is_authenticated %}
+<p>Tu usuario no tiene acceso a esta página .</p>
+{% else %}
+<p>Porfavor logueate para que puedas ver el contenido de esta pagina.</p>
+{% endif %}
+{% endif %}
+
+<div style="margin: 200px 300px">
+
+    <div >
+        <div class="card card-header bg-primary text-white">
+            <h3 style="margin: auto; " class="card-title ">Autenticar</h3>
+        </div>
+        <form style="overflow-y: visible; " action="{% url 'loginn' %}" method="post">
+            <div class="card-body">
+                {%if messages %}
+                {%for mensaje in messages%}
+                    <span class="alert alert-{{mensaje.tags}}"> {{mensajes}}</span>
+                {% endfor %}
+
+                {%endif%}
+                {% csrf_token %}
+                {{ form|crispy }}
+            </div>
+            <div class="card-footer">
+                <input type="submit" class="btn btn-primary" value="Login"> <input type="hidden" name="next" value="{{ next }}">
+                <a href="{% url 'Home' %}" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+
+
+    </div>
+</div> 
+
+{% endblock %}
+{%block foot%}
+{% endblock %}

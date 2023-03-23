@@ -1,0 +1,103 @@
+{% extends 'memorandum/index.html' %}
+{% load static %}
+{% block header %}
+<header class="tm-header" id="tm-header">
+    <div class="tm-header-wrapper">
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="tm-site-header">
+            <img class="mb-3 mx-auto tm-site-logo" src="{{empresa.logo.url}}">            
+            <h1 class="text-center">{{empresa.nombre}}</h1>
+        </div>
+        <nav class="tm-nav" id="tm-nav">            
+            <ul>
+                {% if user.is_authenticated %}                  
+                    <h5 style="color: white; text-align:center;">Bienvenido {{ user }}</h5>
+                {% endif %}     
+        
+                <li class="tm-nav-item"><a href="{% url 'Home' %}" class="tm-nav-link">
+                    <i class="fas fa-home"></i>
+                    Inicio
+                </a></li>
+                <li class="tm-nav-item"><a href="{% url 'list_memorandums' %}" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Mis Memorandums
+                </a></li>
+                
+                <li class="tm-nav-item"><a href="{% url 'Contacto' %}" class="tm-nav-link">
+                    <i class="far fa-comments"></i>
+                    Soporte
+                </a></li>
+                {% if user.is_authenticated %}
+                   
+                    <li class="tm-nav-item"><a href="{% url 'logout' %}" class="tm-nav-link">
+                        <i class="fas fa-power-off"></i>
+                        Salir
+                    </a></li>
+                    
+                {%endif%}
+                
+          
+                   
+                </div>
+            </ul>
+        </nav>
+        <div class="tm-mb-65">
+            <a rel="nofollow" href="https://fb.com/templatemo" class="tm-social-link">
+                <i class="fab fa-facebook tm-social-icon"></i>
+            </a>
+            <a href="https://twitter.com" class="tm-social-link">
+                <i class="fab fa-twitter tm-social-icon"></i>
+            </a>
+            <a href="https://instagram.com" class="tm-social-link">
+                <i class="fab fa-instagram tm-social-icon"></i>
+            </a>
+            <a href="https://linkedin.com" class="tm-social-link">
+                <i class="fab fa-linkedin tm-social-icon"></i>
+            </a>
+        </div>
+        <p class="tm-mb-80 pr-5 text-white">
+            Sistema de Memorandums para una Empresa 
+        </p>
+    </div>
+</header>
+{% endblock %}
+<div class="container-fluid">
+    {% block content %}
+    <main class="tm-main">
+        <div class="row tm-row">
+            <h2 class="d-block  tm-color-primary">{{empresa.nombre}}</h2>
+         </div>
+        
+        <div class="row tm-row">
+            <div class="col-12">
+                <h2 class="d-block text-right tm-color-primary">Misión</h2>
+                <p>{{empresa.mision}}</p>
+            </div>                
+        </div>  
+        <hr class="col-12">          
+        <div class="row tm-row">
+            <div class="col-12">
+                <h2 class="d-block text-right tm-color-primary">Visión</h2>
+                <p>{{empresa.vision}}</p>
+            </div>      
+        </div>
+            
+    
+    </main>
+    {% endblock %}
+</div>
+{% block foot %}
+<footer class="row tm-row col-12 col-md-6">  
+    <div style="margin-left: 430px;">
+        <hr class="col-12">
+        Copyright 2023 GoDjango  Company Co. Ltd.
+    </div>
+    
+</footer>
+
+{% endblock %}
+{% block extrajs %}
+{% endblock %}
+</body>
